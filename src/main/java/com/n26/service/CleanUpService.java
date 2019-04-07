@@ -30,7 +30,7 @@ public class CleanUpService {
         this.dateUtil = dateUtil;
     }
 
-    @Scheduled(fixedDelay = FIVE_MINUTES_IN_MILLIS)
+    @Scheduled(initialDelay = FIVE_MINUTES_IN_MILLIS, fixedDelay = FIVE_MINUTES_IN_MILLIS)
     public void deleteOldData() {
         log.info("Start CleanUpService");
         Collection<Transaction> transactions = transactionRepository.findAll();
