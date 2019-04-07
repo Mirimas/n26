@@ -10,7 +10,7 @@ import java.time.Instant;
  */
 @Component
 public class DateUtil {
-    private static final int SECONDS_TRANSACTION_BECOME_OLD = 60;
+    public static final int SECONDS_TRANSACTION_BECOME_OLD = 60;
 
     /**
      * Checking is transaction timestamp more then one minute

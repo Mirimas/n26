@@ -24,7 +24,7 @@ public class DateUtilTest {
         transaction.setTimestamp(Date.from(Instant.now()));
         assertFalse("Transaction created now", dateUtil.isTransactionOld(transaction));
 
-        transaction.setTimestamp(Date.from(Instant.now().minusSeconds(61)));
+        transaction.setTimestamp(Date.from(Instant.now().minusSeconds(DateUtil.SECONDS_TRANSACTION_BECOME_OLD + 1)));
         assertTrue("Transaction is older one minute", dateUtil.isTransactionOld(transaction));
     }
 

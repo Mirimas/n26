@@ -18,8 +18,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Endpoints:
- *   POST /transactions – called every time a transaction is made. It is also the sole input of this rest API.
- *   DELETE /transactions – deletes all transactions.
+ * POST /transactions – called every time a transaction is made. It is also the sole input of this rest API.
+ * DELETE /transactions – deletes all transactions.
  */
 @RestControllerAdvice
 @RequestMapping(path = "/transactions")
@@ -46,10 +46,10 @@ public class TransactionController {
      *
      * @param transaction transaction
      * @return Empty body with one of the following:
-     *  201 – in case of success
-     *  204 – if the transaction is older than 60 seconds
-     *  400 – if the JSON is invalid
-     *  422 – if any of the fields are not parsable or the transaction date is in the future
+     * 201 – in case of success
+     * 204 – if the transaction is older than {@link DateUtil#SECONDS_TRANSACTION_BECOME_OLD} seconds
+     * 400 – if the JSON is invalid
+     * 422 – if any of the fields are not parsable or the transaction date is in the future
      * @throws TransactionTimestampException if transaction date is invalid and handle it at {@link #transactionTimestampException}
      */
     @RequestMapping(method = POST)
@@ -59,9 +59,10 @@ public class TransactionController {
             throw new TransactionTimestampException(UNPROCESSABLE_ENTITY, "Transaction " + transaction + " is in the future");
         }
 
-        // If the transaction is older than 60 seconds then return 204
+        // If the transaction is older than {@link DateUtil#SECONDS_TRANSACTION_BECOME_OLD} seconds then return 204
         if (dateUtil.isTransactionOld(transaction)) {
-            throw new TransactionTimestampException(NO_CONTENT, "Transaction " + transaction + " is older than 60 seconds");
+            throw new TransactionTimestampException(NO_CONTENT, "Transaction " + transaction + " is older than "
+                    + DateUtil.SECONDS_TRANSACTION_BECOME_OLD + " seconds");
         }
 
         transactionRepository.save(transaction);
@@ -71,7 +72,7 @@ public class TransactionController {
 
     /**
      * DELETE /transactions – deletes all transactions.
-     *
+     * <p>
      * This endpoint causes all existing transactions to be deleted.
      * The endpoint should accept an empty request body and return a 204 status code.
      */

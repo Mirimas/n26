@@ -28,7 +28,7 @@ public class CleanUpServiceTest {
         Transaction transaction = new Transaction();
         UUID id = transaction.getId();
         transaction.setAmount(BigDecimal.ONE);
-        transaction.setTimestamp(Date.from(Instant.now().minusSeconds(61)));
+        transaction.setTimestamp(Date.from(Instant.now().minusSeconds(DateUtil.SECONDS_TRANSACTION_BECOME_OLD + 1)));
         transactionRepository.save(transaction);
 
         assertTrue(transactionRepository.findById(id).isPresent());

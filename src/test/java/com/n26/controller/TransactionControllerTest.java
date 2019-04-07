@@ -2,6 +2,7 @@ package com.n26.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.n26.service.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +67,7 @@ public class TransactionControllerTest {
     public void createTransactionOld() throws JsonProcessingException {
         Map<String, Object> json = new HashMap<>();
         json.put("amount", "1");
-        json.put("timestamp", Instant.now().minusSeconds(61).toString());
+        json.put("timestamp", Instant.now().minusSeconds(DateUtil.SECONDS_TRANSACTION_BECOME_OLD + 1).toString());
 
         assertEquals(204, sendPost(json).getStatusCodeValue());
     }

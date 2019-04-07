@@ -2,6 +2,7 @@ package com.n26.controller;
 
 import com.n26.entity.Statistic;
 import com.n26.repository.TransactionRepository;
+import com.n26.service.DateUtil;
 import com.n26.service.StatisticService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Endpoint:
- *  GET /statistics – returns the statistic based of the transactions of the last 60 seconds.
+ *  GET /statistics – returns the statistic based of the transactions of the last {@link DateUtil#SECONDS_TRANSACTION_BECOME_OLD} seconds.
  */
 @RestController
 @RequestMapping(path = "/statistics")
@@ -25,7 +26,7 @@ public class StatisticController {
 
     /**
      * GET /statistics
-     * This endpoint returns the statistics computed on the transactions within the last 60 seconds.
+     * This endpoint returns the statistics computed on the transactions within the last {@link DateUtil#SECONDS_TRANSACTION_BECOME_OLD} seconds.
      *
      * @return
      * {
