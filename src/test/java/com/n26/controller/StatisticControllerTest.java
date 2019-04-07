@@ -38,6 +38,7 @@ public class StatisticControllerTest {
     public void setUp() {
         url = "http://localhost:" + port + "/statistics";
         urlTransaction = "http://localhost:" + port + "/transactions";
+        restTemplate.delete(urlTransaction);
     }
 
     @Test
