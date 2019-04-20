@@ -1,5 +1,8 @@
 # Transactions statistics N26
 
+[![Build Status](https://travis-ci.org/Mirimas/n26.svg?branch=master)](https://travis-ci.org/Mirimas/n26)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0adf904bf7848a49b46560cba9c1e62)](https://www.codacy.com/app/Mirimas/n26?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Mirimas/n26&amp;utm_campaign=Badge_Grade)
+
 RESTful API for our statistics. The main use case for the API is to calculate realtime statistics for the last 60 seconds of transactions.
 
 ## Commands
